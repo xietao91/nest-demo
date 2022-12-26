@@ -31,7 +31,6 @@ export class GirlController {
 
   @Get('findGirlById/:id')
   findGirlById(@Param() params, @Headers() header): any {
-    console.log(header);
     const { id } = params;
     return this.girlService.getGirlById(parseInt(id));
   }
