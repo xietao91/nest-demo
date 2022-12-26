@@ -2,6 +2,8 @@ import {
   Controller,
   Get,
   Post,
+  Delete,
+  Put,
   Query,
   Body,
   Request,
@@ -23,10 +25,30 @@ export class GirlController {
     return this.girlService.addGirl(body);
   }
 
+  @Delete('delete')
+  delete(@Query() { id }): any {
+    return this.girlService.delGirl(id);
+  }
+
+  @Put('update')
+  update(@Query() { id }, @Body() body): any {
+    return this.girlService.updateGirl(id, body);
+  }
+
+  @Get('all')
+  getAllGirls(): any {
+    return this.girlService.getAllGirls();
+  }
+
   @Get('getGirlById')
   getGirlById(@Query() query): any {
     const { id } = query;
     return this.girlService.getGirlById(parseInt(id));
+  }
+
+  @Get('getGirlByName/:name')
+  getGirlByName(@Param() { name }: any) {
+    return this.girlService.getGirlByName(name);
   }
 
   @Get('findGirlById/:id')
