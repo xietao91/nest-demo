@@ -55,4 +55,9 @@ export class GirlController {
     const { id } = params;
     return this.girlService.getGirlById(parseInt(id));
   }
+
+  @Get('/hotLoad')
+  hotLoad(): any {
+    return 'HotLoad Function';
+  }
 }
