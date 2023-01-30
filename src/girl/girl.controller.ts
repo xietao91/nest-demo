@@ -8,12 +8,18 @@ import {
   Body,
   Headers,
   Param,
+  Inject,
 } from '@nestjs/common';
 import { GirlService } from './girl.service';
+import { BoyService } from '../boy/boy.service';
 
 @Controller('girl')
 export class GirlController {
-  constructor(private girlService: GirlService) {}
+  constructor(
+    @Inject('Config') private shopName: string,
+    private girlService: GirlService,
+    private boyService: BoyService,
+  ) {}
   @Get()
   getGirlList(): any {
     return this.girlService.getGirlList();
@@ -59,5 +65,15 @@ export class GirlController {
   @Get('/hotLoad')
   hotLoad(): any {
     return 'HotLoad Function';
+  }
+
+  @Get('/corstest')
+  corsTest(): object {
+    return { message: '跨域请求测试成功' };
+  }
+
+  @Get('/test')
+  test(): string {
+    return this.shopName;
   }
 }
